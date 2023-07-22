@@ -2,8 +2,6 @@ const express = require('express');
 const routes = require('express').Router();
 const sessions = require('express-session');
 const app = express();
-// const multer = require('multer');
-// const upload = multer();
 
 // creating 24 hours from milliseconds
 const oneDay = 1000 * 60 * 60 * 24;
@@ -21,24 +19,24 @@ const {
     getAll,
     getById,
     _delete
-} = require('./shipping-line.controller');
+} = require('./load-port-origin.controller');
 // const { isAuthenticated } = require('../../middlewares/isAuthenticated');
 const { isAuthenticated } = true;
 
-sessions.Session.prototype.authenticate = (req, banner, cb) => {
+sessions.Session.prototype.authenticate = (req, loadPortOrigin, cb) => {
     try {
-        req.session.bannerInfo = banner
-        req.session.banner = banner.email
+        req.session.loadPortOriginInfo = loadPortOrigin
+        req.session.loadPortOrigin = loadPortOrigin.email
         cb();
     } catch (error) {
         cb(error);
     }
 }
 
-routes.get('/shippingLine/getAll', getAll);
-// routes.get('/shippingLine/getById/:id', isAuthenticated, getById);
-// routes.post('/shippingLine/create', isAuthenticated, create);
-// routes.put('/shippingLine/update', isAuthenticated, update);
-// routes.delete('/shippingLine/delete', _delete);
-// routes.put('/shippingLine/uploadPicture', upload.single(`file`), uploadPicture);
+routes.get('/loadPortOrigin/getAll', getAll);
+// routes.get('/loadPortOrigin/getById/:id', isAuthenticated, getById);
+// routes.post('/loadPortOrigin/create', isAuthenticated, create);
+// routes.put('/loadPortOrigin/update', isAuthenticated, update);
+// routes.delete('/loadPortOrigin/delete', _delete);
+// routes.put('/loadPortOrigin/uploadPicture', upload.single(`file`), uploadPicture);
 module.exports = routes;

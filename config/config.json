@@ -8,14 +8,18 @@
         "server": "instance-evonith-steel.cvfogc2he6wa.ap-south-1.rds.amazonaws.com",
         "options": {
             "port": 1433,
-            "trustServerCertificate": true,
-            "requestTimeout": 300000
+            "trustServerCertificate": true
         },
         "authentication": {
             "type": "default",
             "options": {
                 "userName": "admin_evonith",
                 "password": "#!EpG2ZJF"
+            }
+        },
+        "dialectOptions": {
+            "options": {
+                "requestTimeout": 2000000
             }
         }
     }

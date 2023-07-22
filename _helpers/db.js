@@ -20,9 +20,22 @@ async function initialize() {
 
     // init models and add them to the exported db object
     db.ShippingLine = require('../modules/shipping-line/shipping-line.model')(sequelize);
+    db.LoadPort = require('../modules/load-port/load-port.model')(sequelize);
+    db.LoadPortOrigin = require('../modules/load-port-origin/load-port-origin.model')(sequelize);
+    db.ScrapType = require('../modules/scrap-type/scrap-type.model')(sequelize);
+    db.Vendor = require('../modules/vendor/vendor.model')(sequelize);
+    db.POStatus = require('../modules/po-status/po-status.model')(sequelize);
+    db.GoodsStatus = require('../modules/goods-status/goods-status.model')(sequelize);
+    db.DocumentType = require('../modules/document-type/document-type.model')(sequelize);
+    db.DeliveryTerm = require('../modules/delivery-term/delivery-term.model')(sequelize);
+    db.SourceMaster = require('../modules/source-master/source-master.model')(sequelize);
+    db.ModeOfPayment = require('../modules/mode-of-payment/mode-of-payment.model')(sequelize);
+    db.Bank = require('../modules/bank/bank.model')(sequelize);
+    db.ICD = require('../modules/icd/icd.model')(sequelize);
 
     // sync all models with database
-    await sequelize.sync({ alter: true });
+    await sequelize.sync();
+    // await sequelize.sync({ alter: true });
 }
 
 async function ensureDbExists(dbName) {

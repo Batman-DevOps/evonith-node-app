@@ -11,21 +11,21 @@ module.exports = {
 };
 
 async function getAll() {
-    const shippingLine = await db.ShippingLine.findAll();
-    return shippingLine;
+    const loadPortOrigin = await db.LoadPortOrigin.findAll();
+    return loadPortOrigin;
 }
 
 async function getById(id) {
-    return await getShippingLine(id);
+    return await getLoadPortOrigin(id);
 }
 
 async function create(params) {
     // validate
-    if (await db.ShippingLine.findOne({ where: { name: params.name } })) {
+    if (await db.LoadPortOrigin.findOne({ where: { name: params.name } })) {
         throw 'Email "' + params.name + '" is already registered';
     }
 
-    const shippingLine = new db.ShippingLine(params);
+    const shippingLine = new db.LoadPortOrigin(params);
     
     // hash password
     // shippingLine.passwordHash = await bcrypt.hash(params.password, 10);
@@ -35,12 +35,12 @@ async function create(params) {
 }
 
 async function update(id, params) {
-    const shippingLine = await getShippingLine(id);
+    const shippingLine = await getLoadPortOrigin(id);
 
     // validate
     const shippingLinenameChanged = params.shippingLinename && shippingLine.shippingLinename !== params.shippingLinename;
-    if (shippingLinenameChanged && await db.ShippingLine.findOne({ where: { shippingLinename: params.shippingLinename } })) {
-        throw 'ShippingLinename "' + params.shippingLinename + '" is already taken';
+    if (shippingLinenameChanged && await db.LoadPortOrigin.findOne({ where: { shippingLinename: params.shippingLinename } })) {
+        throw 'LoadPortOriginname "' + params.shippingLinename + '" is already taken';
     }
 
     // hash password if it was entered
@@ -54,14 +54,14 @@ async function update(id, params) {
 }
 
 async function _delete(id) {
-    const shippingLine = await getShippingLine(id);
+    const shippingLine = await getLoadPortOrigin(id);
     await shippingLine.destroy();
 }
 
 // helper functions
 
-async function getShippingLine(id) {
-    const shippingLine = await db.ShippingLine.findByPk(id);
-    if (!shippingLine) throw 'ShippingLine not found';
+async function getLoadPortOrigin(id) {
+    const shippingLine = await db.LoadPortOrigin.findByPk(id);
+    if (!shippingLine) throw 'LoadPortOrigin not found';
     return shippingLine;
 }

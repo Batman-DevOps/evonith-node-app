@@ -2,8 +2,6 @@ const express = require('express');
 const routes = require('express').Router();
 const sessions = require('express-session');
 const app = express();
-// const multer = require('multer');
-// const upload = multer();
 
 // creating 24 hours from milliseconds
 const oneDay = 1000 * 60 * 60 * 24;
@@ -21,7 +19,7 @@ const {
     getAll,
     getById,
     _delete
-} = require('./shipping-line.controller');
+} = require('./mode-of-payment.controller');
 // const { isAuthenticated } = require('../../middlewares/isAuthenticated');
 const { isAuthenticated } = true;
 
@@ -35,10 +33,10 @@ sessions.Session.prototype.authenticate = (req, banner, cb) => {
     }
 }
 
-routes.get('/shippingLine/getAll', getAll);
-// routes.get('/shippingLine/getById/:id', isAuthenticated, getById);
-// routes.post('/shippingLine/create', isAuthenticated, create);
-// routes.put('/shippingLine/update', isAuthenticated, update);
-// routes.delete('/shippingLine/delete', _delete);
-// routes.put('/shippingLine/uploadPicture', upload.single(`file`), uploadPicture);
+routes.get('/modeOfPayment/getAll', getAll);
+// routes.get('/modeOfPayment/getById/:id', isAuthenticated, getById);
+// routes.post('/modeOfPayment/create', isAuthenticated, create);
+// routes.put('/modeOfPayment/update', isAuthenticated, update);
+// routes.delete('/modeOfPayment/delete', _delete);
+// routes.put('/modeOfPayment/uploadPicture', upload.single(`file`), uploadPicture);
 module.exports = routes;
