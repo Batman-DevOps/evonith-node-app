@@ -1,0 +1,22 @@
+{
+    "app": {
+        "prefix": "/evonith-steel/api",
+        "secret": "longlivenodejsafterallitsjavascript3cheershiphiphurray"
+    },
+    "dbName": "evonith_steel",
+    "dbConfig": {
+        "server": "instance-evonith-steel.cvfogc2he6wa.ap-south-1.rds.amazonaws.com",
+        "options": {
+            "port": 1433,
+            "trustServerCertificate": true,
+            "requestTimeout": 300000
+        },
+        "authentication": {
+            "type": "default",
+            "options": {
+                "userName": "admin_evonith",
+                "password": "#!EpG2ZJF"
+            }
+        }
+    }
+}
