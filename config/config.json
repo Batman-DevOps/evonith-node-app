@@ -5,7 +5,7 @@
     },
     "dbName": "evonith_steel",
     "dbConfig": {
-        "server": "db-instance-evonith.cu9qf8stjinj.us-east-2.rds.amazonaws.com",
+        "server": "instance-evonith-steel.cvfogc2he6wa.ap-south-1.rds.amazonaws.com",
         "options": {
             "port": 1433,
             "trustServerCertificate": true
@@ -13,7 +13,7 @@
         "authentication": {
             "type": "default",
             "options": {
-                "userName": "admin",
+                "userName": "admin_evonith",
                 "password": "#!EpG2ZJF"
             }
         },
