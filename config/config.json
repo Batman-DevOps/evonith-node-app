@@ -13,7 +13,7 @@
         "authentication": {
             "type": "default",
             "options": {
-                "userName": "admin-evonith",
+                "userName": "admin_evonith",
                 "password": "#!EpG2ZJF"
             }
         },

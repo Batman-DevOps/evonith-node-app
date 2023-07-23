@@ -45,6 +45,8 @@ async function ensureDbExists(dbName) {
             if (err) {
                 console.error(err);
                 reject(`Connection Failed: ${err.message}`);
+            } else {
+                console.error('Connection established');
             }
 
             const createDbQuery = `IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = '${dbName}') CREATE DATABASE [${dbName}];`;
