@@ -21,6 +21,7 @@ const sourceMasterRoutes = require('../../modules/masters/source-master/source-m
 const modeOfPaymentRoutes = require('../../modules/masters/mode-of-payment/mode-of-payment.routes');
 const bankRoutes = require('../../modules/masters/bank/bank.routes');
 const icdRoutes = require('../../modules/masters/icd/icd.routes');
+const paymentTermRoutes = require('../../modules/masters/payment-term/payment-term.routes');
 
 // Transaction routes
 const contractRoutes = require('../../modules/transactions/contract/contract.routes');
@@ -39,6 +40,7 @@ allRoutes.use(sourceMasterRoutes);
 allRoutes.use(modeOfPaymentRoutes);
 allRoutes.use(bankRoutes);
 allRoutes.use(icdRoutes);
+allRoutes.use(paymentTermRoutes);
 
 // Transaction routes
 allRoutes.use(contractRoutes);

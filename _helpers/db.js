@@ -33,6 +33,7 @@ async function initialize() {
     db.ModeOfPayment = require('../modules/masters/mode-of-payment/mode-of-payment.model')(sequelize);
     db.Bank = require('../modules/masters/bank/bank.model')(sequelize);
     db.ICD = require('../modules/masters/icd/icd.model')(sequelize);
+    db.PaymentTerm = require('../modules/masters/payment-term/payment-term.model')(sequelize);
 
     // Transaction tables
     db.Contract = require('../modules/transactions/contract/contract.model')(sequelize);
