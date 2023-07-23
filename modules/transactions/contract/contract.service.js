@@ -11,7 +11,14 @@ module.exports = {
 };
 
 async function getAll() {
-    let contract = await db.Contract.findAll();
+    let contract = await db.Contract.findAll({
+        where: { isActive: 1 },
+        include: [
+            { model: db.Vendor, as: 'vendor' },
+            { model: db.ScrapType, as: 'scrapType' },
+            { model: db.DeliveryTerm, as: 'deliveryTerm' }
+        ]
+    });
     let contractList = [...contract];
     // contractList.forEach(element => {
     //     element.contractDate = dateFormatter(element.contractDate);

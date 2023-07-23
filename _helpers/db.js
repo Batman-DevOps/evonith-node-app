@@ -41,6 +41,14 @@ async function initialize() {
     // sync all models with database
     await sequelize.sync();
     // await sequelize.sync({ alter: true });
+
+    // Relationships
+    db.Contract.belongsTo(db.Vendor, { targetKey: 'id', foreignKey: 'vendorId', as: 'vendor' });
+    db.Contract.belongsTo(db.ScrapType, { targetKey: 'id', foreignKey: 'scrapTypeId', as: 'scrapType' });
+    db.Contract.belongsTo(db.DeliveryTerm, { targetKey: 'id', foreignKey: 'deliveryTermId', as: 'deliveryTerm' });
+    // db.opportunities.belongsTo(db.users, { targetKey: 'userId', foreignKey: 'createdBy', as: 'createdUser'});
+    // db.opportunities.belongsTo(db.users, { targetKey: 'userId', foreignKey: 'updatedBy', as: 'updatedUser'});
+    // db.opportunities.belongsTo(db.companies, { targetKey: 'companyId', foreignKey: 'companyId', as: 'companyInfo'});
 }
 
 async function ensureDbExists(dbName) {

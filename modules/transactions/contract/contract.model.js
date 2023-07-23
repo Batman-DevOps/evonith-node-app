@@ -19,6 +19,8 @@ function model(sequelize) {
         advance: { type: DataTypes.STRING },
         rate: { type: DataTypes.INTEGER, allowNull: false },
         paymentTermId: { type: DataTypes.INTEGER, allowNull: false },
+        contractValue: { type: DataTypes.STRING, allowNull: false },
+        contractUnit: { type: DataTypes.STRING, allowNull: false },
         deliveryTermId: { type: DataTypes.INTEGER, allowNull: false },
         dispatchWithinDays: { type: DataTypes.INTEGER, allowNull: false },
         status: { type: DataTypes.STRING, allowNull: false },

@@ -5,7 +5,7 @@ module.exports = model;
 function model(sequelize) {
     const attributes = {
         id: { type: DataTypes.INTEGER, allowNull: false, autoIncrement: true, primaryKey: true },
-        name: { type: DataTypes.STRING, allowNull: false },
+        name: { type: DataTypes.STRING, allowNull: false, unique: true },
         description: { type: DataTypes.STRING },
         remark: { type: DataTypes.STRING },
         createdAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
