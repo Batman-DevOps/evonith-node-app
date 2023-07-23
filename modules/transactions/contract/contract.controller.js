@@ -31,6 +31,12 @@ async function update(req, res, next) {
         .catch(next);
 }
 
+async function revise(req, res, next) {
+    contractService.revise(req.body)
+        .then(contract => res.json({ error: false, success: true, message: "Contract revised successfully", data: contract }))
+        .catch(next);
+}
+
 async function _delete(req, res, next) {
     contractService.delete(req.params.id)
         .then(contract => res.json({ error: false, success: true, message: "Contract deleted successfully", data: contract }))
@@ -70,5 +76,6 @@ module.exports = {
     getAll,
     getById,
     update,
+    revise,
     _delete
 };

@@ -7,12 +7,13 @@ module.exports = {
     getById,
     create,
     update,
+    revise,
     delete: _delete
 };
 
 async function getAll() {
     let contract = await db.Contract.findAll({
-        where: { isActive: 1 },
+        where: { isActive: 1, status: 'OPEN' },
         include: [
             { model: db.Vendor, as: 'vendor' },
             { model: db.ScrapType, as: 'scrapType' },
@@ -32,7 +33,6 @@ async function getById(id) {
 }
 
 function create(requestBody) {
-
     return new Promise(async (resolve, reject) => {
         try {
             delete requestBody?.id;
@@ -61,6 +61,29 @@ async function update(requestBody) {
     // copy requestBody to contract and save
     Object.assign(contract, requestBody);
     await contract.save();
+}
+
+async function revise(requestBody) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const contractId = requestBody.id;
+            const quantity = requestBody.quantity;
+            const contract = await getContract(contractId);
+            contract.status = 'CANCELLED';
+            Object.assign(requestBody, contract);
+            let contractData = await contract.save();
+            console.log('contractData', contractData);
+
+            contractData.dataValues.quantity = quantity;
+            contractData.dataValues.status = 'OPEN';
+            delete contractData.dataValues.id;
+            const contractObj = await db.Contract.create(contractData.dataValues);
+            resolve(contractObj);
+        } catch (error) {
+            console.log('error', error);
+            reject(error);
+        }
+    });
 }
 
 async function _delete(id) {

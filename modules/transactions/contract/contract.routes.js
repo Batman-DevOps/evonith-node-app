@@ -15,6 +15,7 @@ app.use(sessions({
 const {
     create,
     update,
+    revise,
     getAll,
     getById,
     _delete
@@ -36,5 +37,6 @@ routes.get('/contract/getAll', getAll);
 routes.get('/contract/getById/:id', getById);
 routes.post('/contract/create', create);
 routes.put('/contract/update', update);
+routes.put('/contract/revise', revise);
 routes.delete('/contract/delete', _delete);
 module.exports = routes;
