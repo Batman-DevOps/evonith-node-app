@@ -26,7 +26,7 @@ async function create(req, res, next) {
 }
 
 async function update(req, res, next) {
-    contractService.update(req.params.id, req.body)
+    contractService.update(req.body)
         .then(contract => res.json({ error: false, success: true, message: "Contract updated successfully", data: contract }))
         .catch(next);
 }

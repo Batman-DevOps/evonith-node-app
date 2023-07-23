@@ -49,18 +49,13 @@ function create(requestBody) {
     });
 }
 
-async function update(id, requestBody) {
-    const contract = await getContract(id);
+async function update(requestBody) {
+    const contract = await getContract(requestBody.id);
 
     // validate
-    const contractnameChanged = requestBody.contractname && contract.contractname !== requestBody.contractname;
-    if (contractnameChanged && await Contract.findOne({ where: { contractname: requestBody.contractname } })) {
-        throw 'Contractname "' + requestBody.contractname + '" is already taken';
-    }
-
-    // hash password if it was entered
-    if (requestBody.password) {
-        requestBody.passwordHash = await bcrypt.hash(requestBody.password, 10);
+    const contractNumberChanged = requestBody.contractNumber && contract.contractNumber !== requestBody.contractNumber;
+    if (contractNumberChanged && await db.Contract.findOne({ where: { contractNumber: requestBody.contractNumber } })) {
+        throw `Contract Number ${requestBody.contractNumber} is already taken`;
     }
 
     // copy requestBody to contract and save
@@ -76,7 +71,7 @@ async function _delete(id) {
 // helper functions
 
 async function getContract(id) {
-    const contract = await Contract.findByPk(id);
+    const contract = await db.Contract.findByPk(id);
     if (!contract) throw 'Contract not found';
     return contract;
 }
