@@ -8,12 +8,8 @@ function model(sequelize) {
         name: { type: DataTypes.STRING, allowNull: false },
         description: { type: DataTypes.STRING },
         remark: { type: DataTypes.STRING },
-        // created_by: { type: DataTypes.INTEGER, allowNull: false },
-        // created_at: { type: DataTypes.DATE, allowNull: false },
         createdAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
         createdBy: { type: DataTypes.INTEGER, defaultValue: 1 },
-        // updated_by: { type: DataTypes.INTEGER, allowNull: true },
-        // updated_at: { type: DataTypes.DATE, allowNull: false },
         updatedAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
         updatedBy: { type: DataTypes.INTEGER, defaultValue: 1 },
         isActive: { type: DataTypes.INTEGER, defaultValue: 1 }

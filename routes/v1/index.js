@@ -7,20 +7,25 @@ allRoutes.get('/', (req, res) => {
     });
 })
 
-const shippingLineRoutes = require('../../modules/shipping-line/shipping-line.routes');
-const loadPortRoutes = require('../../modules/load-port/load-port.routes');
-const loadPortOriginRoutes = require('../../modules/load-port-origin/load-port-origin.routes');
-const scrapTypeRoutes = require('../../modules/scrap-type/scrap-type.routes');
-const vendorRoutes = require('../../modules/vendor/vendor.routes');
-const poStatusRoutes = require('../../modules/po-status/po-status.routes');
-const goodsStatusRoutes = require('../../modules/goods-status/goods-status.routes');
-const documentTypeRoutes = require('../../modules/document-type/document-type.routes');
-const deliveryTermRoutes = require('../../modules/delivery-term/delivery-term.routes');
-const sourceMasterRoutes = require('../../modules/source-master/source-master.routes');
-const modeOfPaymentRoutes = require('../../modules/mode-of-payment/mode-of-payment.routes');
-const bankRoutes = require('../../modules/bank/bank.routes');
-const icdRoutes = require('../../modules/icd/icd.routes');
+// Master routes
+const shippingLineRoutes = require('../../modules/masters/shipping-line/shipping-line.routes');
+const loadPortRoutes = require('../../modules/masters/load-port/load-port.routes');
+const loadPortOriginRoutes = require('../../modules/masters/load-port-origin/load-port-origin.routes');
+const scrapTypeRoutes = require('../../modules/masters/scrap-type/scrap-type.routes');
+const vendorRoutes = require('../../modules/masters/vendor/vendor.routes');
+const poStatusRoutes = require('../../modules/masters/po-status/po-status.routes');
+const goodsStatusRoutes = require('../../modules/masters/goods-status/goods-status.routes');
+const documentTypeRoutes = require('../../modules/masters/document-type/document-type.routes');
+const deliveryTermRoutes = require('../../modules/masters/delivery-term/delivery-term.routes');
+const sourceMasterRoutes = require('../../modules/masters/source-master/source-master.routes');
+const modeOfPaymentRoutes = require('../../modules/masters/mode-of-payment/mode-of-payment.routes');
+const bankRoutes = require('../../modules/masters/bank/bank.routes');
+const icdRoutes = require('../../modules/masters/icd/icd.routes');
 
+// Transaction routes
+const contractRoutes = require('../../modules/transactions/contract/contract.routes');
+
+// Master routes
 allRoutes.use(shippingLineRoutes);
 allRoutes.use(loadPortRoutes);
 allRoutes.use(loadPortOriginRoutes);
@@ -34,5 +39,8 @@ allRoutes.use(sourceMasterRoutes);
 allRoutes.use(modeOfPaymentRoutes);
 allRoutes.use(bankRoutes);
 allRoutes.use(icdRoutes);
+
+// Transaction routes
+allRoutes.use(contractRoutes);
 
 module.exports = allRoutes;

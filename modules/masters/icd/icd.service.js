@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
-
-const db = require('../../_helpers/db');
+const db = require('_helpers/db');
 
 module.exports = {
     getAll,
@@ -11,21 +10,21 @@ module.exports = {
 };
 
 async function getAll() {
-    const deliveryTerm = await db.DeliveryTerm.findAll();
-    return deliveryTerm;
+    const icd = await db.ICD.findAll();
+    return icd;
 }
 
 async function getById(id) {
-    return await getDeliveryTerm(id);
+    return await getICD(id);
 }
 
 async function create(params) {
     // validate
-    if (await db.DeliveryTerm.findOne({ where: { name: params.name } })) {
+    if (await db.ICD.findOne({ where: { name: params.name } })) {
         throw 'Email "' + params.name + '" is already registered';
     }
 
-    const shippingLine = new db.DeliveryTerm(params);
+    const shippingLine = new db.ICD(params);
     
     // hash password
     // shippingLine.passwordHash = await bcrypt.hash(params.password, 10);
@@ -35,12 +34,12 @@ async function create(params) {
 }
 
 async function update(id, params) {
-    const shippingLine = await getDeliveryTerm(id);
+    const shippingLine = await getICD(id);
 
     // validate
     const shippingLinenameChanged = params.shippingLinename && shippingLine.shippingLinename !== params.shippingLinename;
-    if (shippingLinenameChanged && await db.DeliveryTerm.findOne({ where: { shippingLinename: params.shippingLinename } })) {
-        throw 'DeliveryTermname "' + params.shippingLinename + '" is already taken';
+    if (shippingLinenameChanged && await db.ICD.findOne({ where: { shippingLinename: params.shippingLinename } })) {
+        throw 'ICDname "' + params.shippingLinename + '" is already taken';
     }
 
     // hash password if it was entered
@@ -54,14 +53,14 @@ async function update(id, params) {
 }
 
 async function _delete(id) {
-    const shippingLine = await getDeliveryTerm(id);
+    const shippingLine = await getICD(id);
     await shippingLine.destroy();
 }
 
 // helper functions
 
-async function getDeliveryTerm(id) {
-    const shippingLine = await db.DeliveryTerm.findByPk(id);
-    if (!shippingLine) throw 'DeliveryTerm not found';
+async function getICD(id) {
+    const shippingLine = await db.ICD.findByPk(id);
+    if (!shippingLine) throw 'ICD not found';
     return shippingLine;
 }

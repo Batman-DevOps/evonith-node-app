@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-const db = require('../../_helpers/db');
+const db = require('_helpers/db');
 
 module.exports = {
     getAll,
@@ -11,21 +11,21 @@ module.exports = {
 };
 
 async function getAll() {
-    const bank = await db.Bank.findAll();
-    return bank;
+    const documentType = await db.DocumentType.findAll();
+    return documentType;
 }
 
 async function getById(id) {
-    return await getBank(id);
+    return await getDocumentType(id);
 }
 
 async function create(params) {
     // validate
-    if (await db.Bank.findOne({ where: { name: params.name } })) {
+    if (await db.DocumentType.findOne({ where: { name: params.name } })) {
         throw 'Email "' + params.name + '" is already registered';
     }
 
-    const shippingLine = new db.Bank(params);
+    const shippingLine = new db.DocumentType(params);
     
     // hash password
     // shippingLine.passwordHash = await bcrypt.hash(params.password, 10);
@@ -35,12 +35,12 @@ async function create(params) {
 }
 
 async function update(id, params) {
-    const shippingLine = await getBank(id);
+    const shippingLine = await getDocumentType(id);
 
     // validate
     const shippingLinenameChanged = params.shippingLinename && shippingLine.shippingLinename !== params.shippingLinename;
-    if (shippingLinenameChanged && await db.Bank.findOne({ where: { shippingLinename: params.shippingLinename } })) {
-        throw 'Bankname "' + params.shippingLinename + '" is already taken';
+    if (shippingLinenameChanged && await db.DocumentType.findOne({ where: { shippingLinename: params.shippingLinename } })) {
+        throw 'DocumentTypename "' + params.shippingLinename + '" is already taken';
     }
 
     // hash password if it was entered
@@ -54,14 +54,14 @@ async function update(id, params) {
 }
 
 async function _delete(id) {
-    const shippingLine = await getBank(id);
+    const shippingLine = await getDocumentType(id);
     await shippingLine.destroy();
 }
 
 // helper functions
 
-async function getBank(id) {
-    const shippingLine = await db.Bank.findByPk(id);
-    if (!shippingLine) throw 'Bank not found';
+async function getDocumentType(id) {
+    const shippingLine = await db.DocumentType.findByPk(id);
+    if (!shippingLine) throw 'DocumentType not found';
     return shippingLine;
 }

@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-const db = require('../../_helpers/db');
+const db = require('_helpers/db');
 
 module.exports = {
     getAll,
@@ -11,21 +11,21 @@ module.exports = {
 };
 
 async function getAll() {
-    const shippingLine = await db.ShippingLine.findAll();
-    return shippingLine;
+    const poStatus = await db.POStatus.findAll();
+    return poStatus;
 }
 
 async function getById(id) {
-    return await getShippingLine(id);
+    return await getPOStatus(id);
 }
 
 async function create(params) {
     // validate
-    if (await db.ShippingLine.findOne({ where: { name: params.name } })) {
+    if (await db.POStatus.findOne({ where: { name: params.name } })) {
         throw 'Email "' + params.name + '" is already registered';
     }
 
-    const shippingLine = new db.ShippingLine(params);
+    const shippingLine = new db.POStatus(params);
     
     // hash password
     // shippingLine.passwordHash = await bcrypt.hash(params.password, 10);
@@ -35,12 +35,12 @@ async function create(params) {
 }
 
 async function update(id, params) {
-    const shippingLine = await getShippingLine(id);
+    const shippingLine = await getPOStatus(id);
 
     // validate
     const shippingLinenameChanged = params.shippingLinename && shippingLine.shippingLinename !== params.shippingLinename;
-    if (shippingLinenameChanged && await db.ShippingLine.findOne({ where: { shippingLinename: params.shippingLinename } })) {
-        throw 'ShippingLinename "' + params.shippingLinename + '" is already taken';
+    if (shippingLinenameChanged && await db.POStatus.findOne({ where: { shippingLinename: params.shippingLinename } })) {
+        throw 'POStatusname "' + params.shippingLinename + '" is already taken';
     }
 
     // hash password if it was entered
@@ -54,14 +54,14 @@ async function update(id, params) {
 }
 
 async function _delete(id) {
-    const shippingLine = await getShippingLine(id);
+    const shippingLine = await getPOStatus(id);
     await shippingLine.destroy();
 }
 
 // helper functions
 
-async function getShippingLine(id) {
-    const shippingLine = await db.ShippingLine.findByPk(id);
-    if (!shippingLine) throw 'ShippingLine not found';
+async function getPOStatus(id) {
+    const shippingLine = await db.POStatus.findByPk(id);
+    if (!shippingLine) throw 'POStatus not found';
     return shippingLine;
 }

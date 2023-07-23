@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-const db = require('../../_helpers/db');
+const db = require('_helpers/db');
 
 module.exports = {
     getAll,
@@ -11,21 +11,21 @@ module.exports = {
 };
 
 async function getAll() {
-    const poStatus = await db.POStatus.findAll();
-    return poStatus;
+    const vendor = await db.Vendor.findAll();
+    return vendor;
 }
 
 async function getById(id) {
-    return await getPOStatus(id);
+    return await getVendor(id);
 }
 
 async function create(params) {
     // validate
-    if (await db.POStatus.findOne({ where: { name: params.name } })) {
+    if (await db.Vendor.findOne({ where: { name: params.name } })) {
         throw 'Email "' + params.name + '" is already registered';
     }
 
-    const shippingLine = new db.POStatus(params);
+    const shippingLine = new db.Vendor(params);
     
     // hash password
     // shippingLine.passwordHash = await bcrypt.hash(params.password, 10);
@@ -35,12 +35,12 @@ async function create(params) {
 }
 
 async function update(id, params) {
-    const shippingLine = await getPOStatus(id);
+    const shippingLine = await getVendor(id);
 
     // validate
     const shippingLinenameChanged = params.shippingLinename && shippingLine.shippingLinename !== params.shippingLinename;
-    if (shippingLinenameChanged && await db.POStatus.findOne({ where: { shippingLinename: params.shippingLinename } })) {
-        throw 'POStatusname "' + params.shippingLinename + '" is already taken';
+    if (shippingLinenameChanged && await db.Vendor.findOne({ where: { shippingLinename: params.shippingLinename } })) {
+        throw 'Vendorname "' + params.shippingLinename + '" is already taken';
     }
 
     // hash password if it was entered
@@ -54,14 +54,14 @@ async function update(id, params) {
 }
 
 async function _delete(id) {
-    const shippingLine = await getPOStatus(id);
+    const shippingLine = await getVendor(id);
     await shippingLine.destroy();
 }
 
 // helper functions
 
-async function getPOStatus(id) {
-    const shippingLine = await db.POStatus.findByPk(id);
-    if (!shippingLine) throw 'POStatus not found';
+async function getVendor(id) {
+    const shippingLine = await db.Vendor.findByPk(id);
+    if (!shippingLine) throw 'Vendor not found';
     return shippingLine;
 }

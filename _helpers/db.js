@@ -19,19 +19,23 @@ async function initialize() {
     const sequelize = new Sequelize(dbName, userName, password, { host, dialect });
 
     // init models and add them to the exported db object
-    db.ShippingLine = require('../modules/shipping-line/shipping-line.model')(sequelize);
-    db.LoadPort = require('../modules/load-port/load-port.model')(sequelize);
-    db.LoadPortOrigin = require('../modules/load-port-origin/load-port-origin.model')(sequelize);
-    db.ScrapType = require('../modules/scrap-type/scrap-type.model')(sequelize);
-    db.Vendor = require('../modules/vendor/vendor.model')(sequelize);
-    db.POStatus = require('../modules/po-status/po-status.model')(sequelize);
-    db.GoodsStatus = require('../modules/goods-status/goods-status.model')(sequelize);
-    db.DocumentType = require('../modules/document-type/document-type.model')(sequelize);
-    db.DeliveryTerm = require('../modules/delivery-term/delivery-term.model')(sequelize);
-    db.SourceMaster = require('../modules/source-master/source-master.model')(sequelize);
-    db.ModeOfPayment = require('../modules/mode-of-payment/mode-of-payment.model')(sequelize);
-    db.Bank = require('../modules/bank/bank.model')(sequelize);
-    db.ICD = require('../modules/icd/icd.model')(sequelize);
+    // Master tables
+    db.ShippingLine = require('../modules/masters/shipping-line/shipping-line.model')(sequelize);
+    db.LoadPort = require('../modules/masters/load-port/load-port.model')(sequelize);
+    db.LoadPortOrigin = require('../modules/masters/load-port-origin/load-port-origin.model')(sequelize);
+    db.ScrapType = require('../modules/masters/scrap-type/scrap-type.model')(sequelize);
+    db.Vendor = require('../modules/masters/vendor/vendor.model')(sequelize);
+    db.POStatus = require('../modules/masters/po-status/po-status.model')(sequelize);
+    db.GoodsStatus = require('../modules/masters/goods-status/goods-status.model')(sequelize);
+    db.DocumentType = require('../modules/masters/document-type/document-type.model')(sequelize);
+    db.DeliveryTerm = require('../modules/masters/delivery-term/delivery-term.model')(sequelize);
+    db.SourceMaster = require('../modules/masters/source-master/source-master.model')(sequelize);
+    db.ModeOfPayment = require('../modules/masters/mode-of-payment/mode-of-payment.model')(sequelize);
+    db.Bank = require('../modules/masters/bank/bank.model')(sequelize);
+    db.ICD = require('../modules/masters/icd/icd.model')(sequelize);
+
+    // Transaction tables
+    db.Contract = require('../modules/transactions/contract/contract.model')(sequelize);
 
     // sync all models with database
     await sequelize.sync();
