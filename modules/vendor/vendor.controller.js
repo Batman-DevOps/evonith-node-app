@@ -9,7 +9,7 @@ const vendorService = require('./vendor.service');
 // route functions
 async function getAll(req, res, next) {
     vendorService.getAll()
-        .then(vendors => res.json({ error: false, success: true, message: "Load ports fetched successfully", data: vendors }))
+        .then(vendors => res.json({ error: false, success: true, message: "Vendors fetched successfully", data: vendors }))
         .catch(next);
 }
 
