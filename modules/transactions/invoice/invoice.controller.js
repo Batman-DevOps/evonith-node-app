@@ -4,45 +4,47 @@ const Joi = require('joi');
 
 const validateRequest = require('_middleware/validate-request');
 const Role = require('_helpers/role');
-const contractService = require('./contract.service');
+const invoiceService = require('./invoice.service');
 const { sendResponse } = require('_utilities/sendResponse');
 
 // route functions
 async function getAll(req, res, next) {
-    contractService.getAll()
-        .then(contracts => res.json({ error: false, success: true, message: "Contracts fetched successfully", data: contracts }))
+    invoiceService.getAll()
+        .then(invoices => res.json({ error: false, success: true, message: "Invoices fetched successfully", data: invoices }))
         .catch(error => {
-            sendResponse(res, 500, null, (error.message || error || error.error), false, true);
+            console.log('error', error);
+            error;
+            // sendResponse(res, 500, null, (error.message || error || error.error), false, true);
         });
 }
 
 async function getById(req, res, next) {
-    contractService.getById(req.params.id)
-        .then(contract => res.json({ error: false, success: true, message: "Contract fetched successfully", data: contract }))
+    invoiceService.getById(req.params.id)
+        .then(invoice => res.json({ error: false, success: true, message: "Invoice fetched successfully", data: invoice }))
         .catch(next);
 }
 
 async function create(req, res, next) {
-    contractService.create(req.body)
-        .then(contract => res.json({ error: false, success: true, message: "Contract created successfully", data: contract }))
+    invoiceService.create(req.body)
+        .then(invoice => res.json({ error: false, success: true, message: "Invoice created successfully", data: invoice }))
         .catch(next);
 }
 
 async function update(req, res, next) {
-    contractService.update(req.body)
-        .then(contract => res.json({ error: false, success: true, message: "Contract updated successfully", data: contract }))
+    invoiceService.update(req.body)
+        .then(invoice => res.json({ error: false, success: true, message: "Invoice updated successfully", data: invoice }))
         .catch(next);
 }
 
 async function revise(req, res, next) {
-    contractService.revise(req.body)
-        .then(contract => res.json({ error: false, success: true, message: "Contract revised successfully", data: contract }))
+    invoiceService.revise(req.body)
+        .then(invoice => res.json({ error: false, success: true, message: "Invoice revised successfully", data: invoice }))
         .catch(next);
 }
 
 async function _delete(req, res, next) {
-    contractService.delete(req.params.id)
-        .then(contract => res.json({ error: false, success: true, message: "Contract deleted successfully", data: contract }))
+    invoiceService.delete(req.params.id)
+        .then(invoice => res.json({ error: false, success: true, message: "Invoice deleted successfully", data: invoice }))
         .catch(next);
 }
 
@@ -53,7 +55,7 @@ async function _delete(req, res, next) {
 //         title: Joi.string().required(),
 //         firstName: Joi.string().required(),
 //         lastName: Joi.string().required(),
-//         role: Joi.string().valid(Role.Admin, Role.Contract).required(),
+//         role: Joi.string().valid(Role.Admin, Role.Invoice).required(),
 //         email: Joi.string().email().required(),
 //         password: Joi.string().min(6).required(),
 //         confirmPassword: Joi.string().valid(Joi.ref('password')).required()
@@ -66,7 +68,7 @@ async function _delete(req, res, next) {
 //         title: Joi.string().empty(''),
 //         firstName: Joi.string().empty(''),
 //         lastName: Joi.string().empty(''),
-//         role: Joi.string().valid(Role.Admin, Role.Contract).empty(''),
+//         role: Joi.string().valid(Role.Admin, Role.Invoice).empty(''),
 //         email: Joi.string().email().empty(''),
 //         password: Joi.string().min(6).empty(''),
 //         confirmPassword: Joi.string().valid(Joi.ref('password')).empty('')

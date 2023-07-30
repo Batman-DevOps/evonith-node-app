@@ -94,7 +94,12 @@ async function _delete(id) {
 // helper functions
 
 async function getContract(id) {
-    const contract = await db.Contract.findByPk(id);
+    const contract = await db.Contract.findOne({
+        where: { id: id, isActive: 1, status: 'OPEN' },
+        include: [
+            { model: db.Vendor, as: 'vendor' }
+        ]
+    });
     if (!contract) throw 'Contract not found';
     return contract;
 }

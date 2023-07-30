@@ -9,7 +9,7 @@ const goodsStatusService = require('./goods-status.service');
 // route functions
 async function getAll(req, res, next) {
     goodsStatusService.getAll()
-        .then(goodsStatuss => res.json({ error: false, success: true, message: "Load ports fetched successfully", data: goodsStatuss }))
+        .then(goodsStatuss => res.json({ error: false, success: true, message: "Goods Status fetched successfully", data: goodsStatuss }))
         .catch(next);
 }
 
@@ -21,19 +21,19 @@ async function getAll(req, res, next) {
 
 // function create(req, res, next) {
 //     goodsStatusService.create(req.body)
-//         .then(() => res.json({ message: 'GoodsStatus created' }))
+//         .then(() => res.json({ message: 'Goods Status created' }))
 //         .catch(next);
 // }
 
 // function update(req, res, next) {
 //     goodsStatusService.update(req.params.id, req.body)
-//         .then(() => res.json({ message: 'GoodsStatus updated' }))
+//         .then(() => res.json({ message: 'Goods Status updated' }))
 //         .catch(next);
 // }
 
 // function _delete(req, res, next) {
 //     goodsStatusService.delete(req.params.id)
-//         .then(() => res.json({ message: 'GoodsStatus deleted' }))
+//         .then(() => res.json({ message: 'Goods Status deleted' }))
 //         .catch(next);
 // }
 

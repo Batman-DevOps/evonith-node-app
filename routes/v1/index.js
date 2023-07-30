@@ -25,6 +25,7 @@ const paymentTermRoutes = require('../../modules/masters/payment-term/payment-te
 
 // Transaction routes
 const contractRoutes = require('../../modules/transactions/contract/contract.routes');
+const invoiceRoutes = require('../../modules/transactions/invoice/invoice.routes');
 
 // Master routes
 allRoutes.use(shippingLineRoutes);
@@ -44,5 +45,6 @@ allRoutes.use(paymentTermRoutes);
 
 // Transaction routes
 allRoutes.use(contractRoutes);
+allRoutes.use(invoiceRoutes);
 
 module.exports = allRoutes;
