@@ -9,7 +9,7 @@ const bankService = require('./bank.service');
 // route functions
 async function getAll(req, res, next) {
     bankService.getAll()
-        .then(banks => res.json({ error: false, success: true, message: "Load ports fetched successfully", data: banks }))
+        .then(banks => res.json({ error: false, success: true, message: "Banks fetched successfully", data: banks }))
         .catch(next);
 }
 
