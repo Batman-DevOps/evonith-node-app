@@ -11,11 +11,7 @@ const { sendResponse } = require('_utilities/sendResponse');
 async function getAll(req, res, next) {
     invoiceService.getAll()
         .then(invoices => res.json({ error: false, success: true, message: "Invoices fetched successfully", data: invoices }))
-        .catch(error => {
-            console.log('error', error);
-            error;
-            // sendResponse(res, 500, null, (error.message || error || error.error), false, true);
-        });
+        .catch(next);
 }
 
 async function getById(req, res, next) {

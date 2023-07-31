@@ -11,9 +11,7 @@ const { sendResponse } = require('_utilities/sendResponse');
 async function getAll(req, res, next) {
     contractService.getAll()
         .then(contracts => res.json({ error: false, success: true, message: "Contracts fetched successfully", data: contracts }))
-        .catch(error => {
-            sendResponse(res, 500, null, (error.message || error || error.error), false, true);
-        });
+        .catch(next);
 }
 
 async function getById(req, res, next) {
