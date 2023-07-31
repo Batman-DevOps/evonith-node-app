@@ -22,7 +22,7 @@ async function getAll() {
     });
     let contractList = JSON.parse(JSON.stringify(contract));
     contractList.forEach(element => {
-        element.invoiceQuantity = element.invoices.reduce((ele, {invoiceValue}) => ele + Number(invoiceValue), 0)
+        element.invoiceQuantity = element.invoices.reduce((ele, {invoiceQuantity}) => Number(ele) + Number(invoiceQuantity), 0)
     })
     return contractList;
 }
