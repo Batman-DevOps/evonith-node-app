@@ -11,7 +11,11 @@ module.exports = {
 };
 
 async function getAll() {
-    const vendor = await db.Vendor.findAll();
+    const vendor = await db.Vendor.findAll({
+        order: [
+            ['name', 'ASC']
+        ]
+    });
     return vendor;
 }
 
@@ -26,7 +30,7 @@ async function create(params) {
     }
 
     const shippingLine = new db.Vendor(params);
-    
+
     // hash password
     // shippingLine.passwordHash = await bcrypt.hash(params.password, 10);
 
