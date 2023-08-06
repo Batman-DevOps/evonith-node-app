@@ -12,7 +12,7 @@ function model(sequelize) {
         invoiceQuantity: { type: DataTypes.STRING, allowNull: false },
         
         loadPortId: { type: DataTypes.INTEGER, allowNull: false },
-        numberOfContainer: { type: DataTypes.INTEGER, allowNull: false },
+        numberOfContainers: { type: DataTypes.INTEGER, allowNull: false },
         loadPortOriginId: { type: DataTypes.INTEGER, allowNull: false },
 
         averageQuantity: { type: DataTypes.STRING, allowNull: false },
